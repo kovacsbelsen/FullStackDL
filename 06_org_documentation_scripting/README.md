@@ -22,16 +22,29 @@ It's important to have a project template. Having standards lets you and your te
 
 To start you only need this:
 
+Create a file called `dev.in` with the contents:
+
+```
+mkdocs
+mkdocs-material
+```
+
+OR:
+
 ```bash
 pip install mkdocs mkdocs-material
+```
+
+Now run:
+
+```
 mkdocs new docs
 cd docs
 ```
 
-Some extras:
+Some extra mkdocs plugins:
 
 ```
-# in your requirements.txt
 markdown-include
 mkdocs
 mkdocs-markdownextradata-plugin
@@ -60,17 +73,22 @@ Development:
 mkdocs serve
 ```
 
+Inside your `docs/docs` folder, you can create an `examples.md` and `models.md` files
+and they will show up in your mkdocs site!
+
 Production:
 
 ```bash
 mkdocs build
 ```
 
-That's it!
+That's it! This will generate a `site/` folder.
 
 ## netlify
 
 [Drop](https://app.netlify.com/drop)
+
+Copy the `site/` folder there.
 
 However...
 
@@ -79,12 +97,50 @@ However...
 mkdocs gh-deploy --help
 ```
 
-## pip-tools
+This will generate a `gh-pages` branch, GitHub will automatically generate
+a static site with the contents there. You can use the generated URL to edit
+your GitHub repo.
 
-https://github.com/jazzband/pip-tools
+# Exercises for the afternoon
+
+## script
+
+1. turn the 1.train.ipython notebook into a python script
+
+The script can have the following options:
+
+```
+--download-data
+--train --epochs INT (it should have a default)
+--optimizer STRING
+--load-weights STRING
+    
+# extra work:
+# load the data URL from an environment variable (using a .env file and the python-dotenv package)
+```
+
+Then you can run the script like:
+
+```
+python3 train.py --download-data --train --epochs 3 --optimizer sgd --load-weights my_weigths.pth
+```
+
+**Don't worry if you can't implement all the options**
+
+2. keep writing the documentation
+    * `data.md`: explain what your data is. Is it balanced? What's the source?
+    * `organization.md`: explain how you would organize the project.
+    * `running.md`: explain how to run your script.
+    
+3. Work on the database abstraction we mentioned.
+    * decide what columns your `users` database will have.
+    * implement the 2 missing methods
+    * make sure they work!
 
 ## environment variables
 
-[12factor](https://12factor.net/) app
-
 python-dotenv [pip](https://pypi.org/project/python-dotenv/) / [conda](https://anaconda.org/conda-forge/python-dotenv)
+
+**Interesting read**
+
+[12factor](https://12factor.net/) app
